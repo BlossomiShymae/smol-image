@@ -2,7 +2,6 @@ package io.github.blossomishymae.views;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import io.github.blossomishymae.binding.PastelBinding;
 import io.github.blossomishymae.componentmodel.PropertyChangedEventArgs;
 import io.github.blossomishymae.viewmodels.MainWindowViewModel;
 
@@ -10,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 @Singleton
 public class MainWindowView extends JFrame {

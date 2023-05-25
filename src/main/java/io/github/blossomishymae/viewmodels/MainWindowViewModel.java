@@ -18,29 +18,24 @@ import java.util.List;
 
 @Singleton
 public class MainWindowViewModel extends ObservableObject {
-    private static class ImageSelection implements Transferable {
-        private final Image image;
-
-        public ImageSelection(Image image) {
-            this.image = image;
-        }
+    private record ImageSelection(Image image) implements Transferable {
 
         public DataFlavor[] getTransferDataFlavors() {
-            return new DataFlavor[] { DataFlavor.imageFlavor };
-        }
-
-        public boolean isDataFlavorSupported(DataFlavor flavor) {
-            return DataFlavor.imageFlavor.equals(flavor);
-        }
-
-        public Object getTransferData(DataFlavor flavor)
-            throws UnsupportedFlavorException, IOException {
-            if (!DataFlavor.imageFlavor.equals(flavor)) {
-                throw new UnsupportedFlavorException(flavor);
+                return new DataFlavor[]{DataFlavor.imageFlavor};
             }
-            return image;
+
+            public boolean isDataFlavorSupported(DataFlavor flavor) {
+                return DataFlavor.imageFlavor.equals(flavor);
+            }
+
+            public Object getTransferData(DataFlavor flavor)
+                    throws UnsupportedFlavorException, IOException {
+                if (!DataFlavor.imageFlavor.equals(flavor)) {
+                    throw new UnsupportedFlavorException(flavor);
+                }
+                return image;
+            }
         }
-    }
 
     private int width;
     private int height;

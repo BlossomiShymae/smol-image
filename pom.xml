@@ -23,7 +23,7 @@
                 <artifactId>jpackage-maven-plugin</artifactId>
                 <version>1.3.0</version>
                 <configuration>
-                    <name>Equinox</name>
+                    <name>smol-image</name>
                     <appVersion>${project.version}</appVersion>
                     <runtimeImage>${java.home}</runtimeImage>
                     <type>APP_IMAGE</type>

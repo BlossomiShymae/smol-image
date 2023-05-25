@@ -5,7 +5,6 @@ import com.google.inject.Injector;
 import io.github.blossomishymae.configuration.ApplicationInjectorConfiguration;
 import io.github.blossomishymae.views.MainWindowView;
 import org.pushingpixels.radiance.theming.api.skin.RadianceModerateLookAndFeel;
-import org.pushingpixels.radiance.theming.api.skin.RadianceNightShadeLookAndFeel;
 
 import javax.swing.*;
 

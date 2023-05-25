@@ -26,10 +26,13 @@ public class MainWindowView extends JFrame {
         JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel scaleLabel = new JLabel("Scale down to ");
         JRadioButton widthButton = new JRadioButton("Width");
+        widthButton.addActionListener(e -> viewModel.setDimension(MainWindowViewModel.Dimension.WIDTH));
         JRadioButton heightButton = new JRadioButton("Height");
+        heightButton.addActionListener(e -> viewModel.setDimension(MainWindowViewModel.Dimension.HEIGHT));
         ButtonGroup group = new ButtonGroup();
         group.add(widthButton);
         group.add(heightButton);
+
         JTextField dimensionField = new JTextField(5);
         dimensionField.addKeyListener(new KeyAdapter() {
             @Override
@@ -55,7 +58,7 @@ public class MainWindowView extends JFrame {
 
         add(containerPanel);
         setTitle("smol-image");
-        setSize(800,600);
+        setSize(360,240);
         setLocationRelativeTo(null);
         setVisible(true);
     }

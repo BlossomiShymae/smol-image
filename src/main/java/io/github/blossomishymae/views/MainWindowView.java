@@ -2,21 +2,26 @@ package io.github.blossomishymae.views;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import io.github.blossomishymae.binding.PastelBinding;
+import io.github.blossomishymae.componentmodel.PropertyChangedEventArgs;
 import io.github.blossomishymae.viewmodels.MainWindowViewModel;
-import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 @Singleton
 public class MainWindowView extends JFrame {
     private final MainWindowViewModel viewModel;
+    private final JLabel statusLabel;
 
     @Inject
     public MainWindowView(MainWindowViewModel viewModel) {
         super();
         this.viewModel = viewModel;
+        viewModel.propertyChanged.subscribe(this::onPropertyChanged);
 
         JPanel containerPanel = new JPanel(new BorderLayout());
         containerPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
@@ -28,10 +33,18 @@ public class MainWindowView extends JFrame {
         group.add(widthButton);
         group.add(heightButton);
         JTextField dimensionField = new JTextField(5);
+        dimensionField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                viewModel.setWidth(tryParseOrDefault(dimensionField.getText(), viewModel.getWidth()));
+                viewModel.setHeight(tryParseOrDefault(dimensionField.getText(), viewModel.getHeight()));
+            }
+        });
         JPanel dragDropPanel = new JPanel(new BorderLayout(10, 10));
         dragDropPanel.setBorder(BorderFactory.createTitledBorder("Drag and drop image"));
+        dragDropPanel.setDropTarget(viewModel.getDropTarget());
         JPanel statusPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel statusLabel = new JLabel("");
+        statusLabel = new JLabel("");
 
         controlPanel.add(scaleLabel);
         controlPanel.add(widthButton);
@@ -47,5 +60,17 @@ public class MainWindowView extends JFrame {
         setSize(800,600);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    private static int tryParseOrDefault(final String string, final int defaultValue) {
+        try {
+            return Integer.parseInt(string, 10);
+        } catch (NumberFormatException ex) {
+            return defaultValue;
+        }
+    }
+
+    private void onPropertyChanged(PropertyChangedEventArgs propertyChangedEventArgs) {
+        statusLabel.setText(viewModel.getStatusText());
     }
 }

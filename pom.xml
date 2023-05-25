@@ -28,8 +28,7 @@
                     <runtimeImage>${java.home}</runtimeImage>
                     <type>APP_IMAGE</type>
                     <input>build</input>
-                    <icon>icons/icon.ico</icon>
-                    <mainClass>Main</mainClass>
+                    <mainClass>io.github.blossomishymae.Main</mainClass>
                     <mainJar>${project.artifactId}-${project.version}-jar-with-dependencies.jar</mainJar>
                     <destination>dist</destination>
                     <javaOptions>
@@ -42,7 +41,6 @@
                     <execution>
                         <id>win</id>
                         <configuration>
-                            <icon>icon.ico</icon>
                             <winMenu>true</winMenu>
                             <winShortcut>true</winShortcut>
                             <winDirChooser>true</winDirChooser>
@@ -65,7 +63,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        Main
+                                        io.github.blossomishymae.Main
                                     </mainClass>
                                 </manifest>
                             </archive>

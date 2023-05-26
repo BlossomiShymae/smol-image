@@ -1,5 +1,7 @@
 # smol-image
 
+![image](https://github.com/BlossomiShymae/smol-image/assets/87099578/ac85c723-3e55-46cc-864f-60b5309c7cb5)
+
 A simple GUI executable that automatically downscales and copies any drag-n-dropped image to the system clipboard.
 Useful for quickly sharing emote-sized images on Discord. :3
 

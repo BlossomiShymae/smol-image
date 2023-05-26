@@ -32,6 +32,7 @@ public class MainWindowView extends JFrame {
         JPanel scalePanel = new JPanel(new BorderLayout());
         scalePanel.setBorder(BorderFactory.createTitledBorder("Scale down to..."));
         JRadioButton widthButton = new JRadioButton("Width");
+        widthButton.setSelected(true);
         widthButton.addActionListener(e -> viewModel.setDimension(MainWindowViewModel.Dimension.WIDTH));
         JRadioButton heightButton = new JRadioButton("Height");
         heightButton.addActionListener(e -> viewModel.setDimension(MainWindowViewModel.Dimension.HEIGHT));

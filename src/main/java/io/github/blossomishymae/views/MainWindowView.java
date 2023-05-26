@@ -24,7 +24,8 @@ public class MainWindowView extends JFrame {
         JPanel containerPanel = new JPanel(new BorderLayout());
         containerPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel scaleLabel = new JLabel("Scale down to ");
+        JPanel scalePanel = new JPanel(new BorderLayout());
+        scalePanel.setBorder(BorderFactory.createTitledBorder("Scale down to..."));
         JRadioButton widthButton = new JRadioButton("Width");
         widthButton.addActionListener(e -> viewModel.setDimension(MainWindowViewModel.Dimension.WIDTH));
         JRadioButton heightButton = new JRadioButton("Height");
@@ -47,11 +48,11 @@ public class MainWindowView extends JFrame {
         JPanel statusPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         statusLabel = new JLabel("");
 
-        controlPanel.add(scaleLabel);
+        controlPanel.add(dimensionField);
         controlPanel.add(widthButton);
         controlPanel.add(heightButton);
-        controlPanel.add(dimensionField);
-        containerPanel.add(controlPanel, BorderLayout.NORTH);
+        scalePanel.add(controlPanel);
+        containerPanel.add(scalePanel, BorderLayout.NORTH);
         containerPanel.add(dragDropPanel, BorderLayout.CENTER);
         statusPanel.add(statusLabel);
         containerPanel.add(statusPanel, BorderLayout.SOUTH);

@@ -9,6 +9,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @Singleton
 public class MainWindowView extends JFrame {
@@ -45,8 +50,24 @@ public class MainWindowView extends JFrame {
         JPanel dragDropPanel = new JPanel(new BorderLayout(10, 10));
         dragDropPanel.setBorder(BorderFactory.createTitledBorder("Drag and drop image"));
         dragDropPanel.setDropTarget(viewModel.getDropTarget());
-        JPanel statusPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        statusLabel = new JLabel("");
+        JPanel statusPanel = new JPanel();
+        statusPanel.setLayout(new BoxLayout(statusPanel, BoxLayout.PAGE_AXIS));
+        statusLabel = new JLabel(" ");
+        JSeparator separator = new JSeparator();
+        JLabel aboutLabel = new JLabel("© 2023 BlossomiShymae 🌸💔");
+        JLabel repositoryLabel = new JLabel("GitHub Repository");
+        repositoryLabel.setForeground(Color.BLUE.darker());
+        repositoryLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        repositoryLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://github.com/BlossomiShymae/smol-image"));
+                } catch (IOException | URISyntaxException ex) {
+                    ex.printStackTrace(System.out);
+                }
+            }
+        });
 
         controlPanel.add(dimensionField);
         controlPanel.add(widthButton);
@@ -55,6 +76,9 @@ public class MainWindowView extends JFrame {
         containerPanel.add(scalePanel, BorderLayout.NORTH);
         containerPanel.add(dragDropPanel, BorderLayout.CENTER);
         statusPanel.add(statusLabel);
+        statusPanel.add(separator);
+        statusPanel.add(aboutLabel);
+        statusPanel.add(repositoryLabel);
         containerPanel.add(statusPanel, BorderLayout.SOUTH);
 
         add(containerPanel);

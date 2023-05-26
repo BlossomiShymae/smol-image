@@ -68,6 +68,7 @@ public class MainWindowViewModel extends ObservableObject {
             }
         }
     }
+    private final Image applicationIcon;
 
     private int width;
     private int height;
@@ -76,6 +77,8 @@ public class MainWindowViewModel extends ObservableObject {
 
     public  MainWindowViewModel() {
         super();
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icon.png"));
+        applicationIcon = icon.getScaledInstance(32, 32, Image.SCALE_SMOOTH);
     }
 
     public int getWidth() {
@@ -91,6 +94,10 @@ public class MainWindowViewModel extends ObservableObject {
     }
 
     public Dimension getDimension() { return dimension; }
+
+    public Image getApplicationIcon() {
+        return applicationIcon;
+    }
 
     public void setWidth(final int width) {
         this.width = width;

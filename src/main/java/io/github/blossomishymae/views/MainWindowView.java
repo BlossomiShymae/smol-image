@@ -58,6 +58,7 @@ public class MainWindowView extends JFrame {
 
         add(containerPanel);
         setTitle("smol-image");
+        setIconImage(viewModel.getApplicationIcon());
         setSize(360,240);
         setLocationRelativeTo(null);
         setVisible(true);

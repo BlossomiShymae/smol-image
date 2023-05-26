@@ -88,6 +88,7 @@ public class MainWindowView extends JFrame {
         setSize(360,240);
         setLocationRelativeTo(null);
         setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private void onPropertyChanged(PropertyChangedEventArgs propertyChangedEventArgs) {

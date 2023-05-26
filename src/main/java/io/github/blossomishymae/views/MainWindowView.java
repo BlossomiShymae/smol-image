@@ -44,8 +44,8 @@ public class MainWindowView extends JFrame {
         dimensionField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                viewModel.setWidth(tryParseOrDefault(dimensionField.getText(), viewModel.getWidth()));
-                viewModel.setHeight(tryParseOrDefault(dimensionField.getText(), viewModel.getHeight()));
+                viewModel.setWidth(dimensionField.getText());
+                viewModel.setHeight(dimensionField.getText());
             }
         });
         JPanel dragDropPanel = new JPanel(new BorderLayout(10, 10));
@@ -88,14 +88,6 @@ public class MainWindowView extends JFrame {
         setSize(360,240);
         setLocationRelativeTo(null);
         setVisible(true);
-    }
-
-    private static int tryParseOrDefault(final String string, final int defaultValue) {
-        try {
-            return Integer.parseInt(string, 10);
-        } catch (NumberFormatException ex) {
-            return defaultValue;
-        }
     }
 
     private void onPropertyChanged(PropertyChangedEventArgs propertyChangedEventArgs) {

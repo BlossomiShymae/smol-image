@@ -72,7 +72,7 @@ public class MainWindowViewModel extends ObservableObject {
 
     private int width;
     private int height;
-    private Dimension dimension = Dimension.NONE;
+    private Dimension dimension = Dimension.WIDTH;
     private String statusText = "";
 
     public  MainWindowViewModel() {
@@ -104,9 +104,27 @@ public class MainWindowViewModel extends ObservableObject {
         notifyPropertyChanged("setWidth");
     }
 
+    public void setWidth(final String width) {
+        if (!isInteger(width)) {
+            setStatusText("Dimension must be a valid number!");
+            return;
+        }
+        setWidth(Integer.parseInt(width));
+        setStatusText(" ");
+    }
+
     public void setHeight(final int height) {
         this.height = height;
         notifyPropertyChanged("setHeight");
+    }
+
+    public void setHeight(final String height) {
+        if (!isInteger(height)) {
+            setStatusText("Dimension must be a valid number!");
+            return;
+        }
+        setHeight(Integer.parseInt(height));
+        setStatusText(" ");
     }
 
     public void setStatusText(final String statusText) {
@@ -141,6 +159,10 @@ public class MainWindowViewModel extends ObservableObject {
                 }
             }
         };
+    }
+
+    private static boolean isInteger(final String string) {
+        return string.chars().allMatch(Character::isDigit) && string.length() != 0;
     }
 
     private ISimpleEventSubscription<Image> decorateOnFinished(ImageWorker worker) {

@@ -27,6 +27,19 @@ public class MainWindowViewModel extends ObservableObject {
         WIDTH,
         HEIGHT
     }
+    public enum Mode {
+        NORMAL,
+        FILE;
+
+        public String getStatusText() {
+            String statusText = null;
+            switch(this)  {
+                case NORMAL -> statusText = "Normal mode";
+                case FILE -> statusText = "File mode";
+            }
+            return statusText;
+        }
+    }
     private record ImageSelection(Image image) implements Transferable {
 
         public DataFlavor[] getTransferDataFlavors() {
@@ -74,6 +87,7 @@ public class MainWindowViewModel extends ObservableObject {
     private int height;
     private Dimension dimension = Dimension.WIDTH;
     private String statusText = "";
+    private Mode mode = Mode.NORMAL;
 
     public  MainWindowViewModel() {
         super();
@@ -98,6 +112,8 @@ public class MainWindowViewModel extends ObservableObject {
     public Image getApplicationIcon() {
         return applicationIcon;
     }
+
+    public Mode getMode() { return mode; }
 
     public void setWidth(final int width) {
         this.width = width;
@@ -135,6 +151,15 @@ public class MainWindowViewModel extends ObservableObject {
     public void setDimension(final Dimension dimension) {
         this.dimension = dimension;
         notifyPropertyChanged("setDimension");
+    }
+
+    public void setMode(final Mode mode) {
+        this.mode = mode;
+        notifyPropertyChanged("setMode");
+    }
+
+    public void toggleMode() {
+        setMode(mode == Mode.FILE ? Mode.NORMAL : Mode.FILE);
     }
 
     public DropTarget getDropTarget() {

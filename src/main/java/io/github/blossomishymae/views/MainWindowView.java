@@ -2,6 +2,7 @@ package io.github.blossomishymae.views;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import io.github.blossomishymae.binding.PastelBinding;
 import io.github.blossomishymae.componentmodel.PropertyChangedEventArgs;
 import io.github.blossomishymae.viewmodels.MainWindowViewModel;
 
@@ -37,6 +38,9 @@ public class MainWindowView extends JFrame {
         JRadioButton heightButton = new JRadioButton("Height");
         heightButton.addActionListener(e -> viewModel.setDimension(MainWindowViewModel.Dimension.HEIGHT));
         ButtonGroup group = new ButtonGroup();
+        JButton modeButton = new JButton();
+        new PastelBinding<>(viewModel, () -> viewModel.getMode().getStatusText(), modeButton::setText);
+        modeButton.addActionListener(e -> viewModel.toggleMode());
         group.add(widthButton);
         group.add(heightButton);
 
@@ -73,6 +77,7 @@ public class MainWindowView extends JFrame {
         controlPanel.add(dimensionField);
         controlPanel.add(widthButton);
         controlPanel.add(heightButton);
+        controlPanel.add(modeButton);
         scalePanel.add(controlPanel);
         containerPanel.add(scalePanel, BorderLayout.NORTH);
         containerPanel.add(dragDropPanel, BorderLayout.CENTER);
@@ -89,6 +94,8 @@ public class MainWindowView extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        viewModel.notifyPropertyChanged("");
     }
 
     private void onPropertyChanged(PropertyChangedEventArgs propertyChangedEventArgs) {
